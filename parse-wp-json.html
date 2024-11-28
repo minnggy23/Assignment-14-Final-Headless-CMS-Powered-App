@@ -1,48 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Test JSON Convert</title>
-</head>
-<body>
-<script>
-  const sampledata = '[{"ID":"32","post_title":"Test Thing 1","acf_fields":"first_name:Ruby,last_name:Shemaria"},{"ID":"36","post_title":"Post 2","acf_fields":"first_name:Professor ,last_name:Ethan"},{"ID":"37","post_title":"Post 3","acf_fields":"first_name:Test,last_name:Name"}]';
+  <head>
+    <title>Test JSON Convert</title>
+  </head>
+  <body>
+    <script>
+      const sampledata =
+        '[{"ID":"32","post_title":"Test Thing 1","acf_fields":"first_name:Ruby,last_name:Shemaria"},{"ID":"36","post_title":"Post 2","acf_fields":"first_name:Professor ,last_name:Ethan"},{"ID":"37","post_title":"Post 3","acf_fields":"first_name:Test,last_name:Name"}]';
 
+      const obj = JSON.parse(sampledata);
 
-const obj = JSON.parse(sampledata);  
+      console.log(obj);
 
-console.log(obj);
+      // loop thru each object in array returned as JSON
+      obj.forEach(function (item) {
+        // reformat string contained in delimited acf field data, add curlies and quotes
+        let x = '{"' + item.scf_fields + '"}';
+        // https://www.w3schools.com/jsref/jsref_replace.asp
+        // x = x.replace(/,/g,'","');
+        x = x.replaceAll(",", '","');
+        // x = x.replace(/:/g,'":"');
+        x = x.replaceAll(":", '":"');
 
-// loop thru each object in array returned as JSON
-obj.forEach(
-  function(item) {
-    // reformat string contained in delimited acf field data, add curlies and quotes
-    let x = '{"' + item.scf_fields + '"}';
-    // https://www.w3schools.com/jsref/jsref_replace.asp
-    // x = x.replace(/,/g,'","');
-    x = x.replaceAll(',','","');
-    // x = x.replace(/:/g,'":"');
-    x = x.replaceAll(':','":"');
-   
-    let y = JSON.parse(x);
-    console.log(y);
-    console.log(y.first_name);
-    item.scf_fields = y;
-  }
-);
+        let y = JSON.parse(x);
+        console.log(y);
+        console.log(y.first_name);
+        item.scf_fields = y;
+      });
 
-console.log(obj);
-
-
-
-
-
-
-
-
-
-</script>
-<h1>Assignment 14: Final Headless CMS-Powered App</h1>
-
-
-</body>
+      console.log(obj);
+    </script>
+    <h1>Assignment 14: Final Headless CMS-Powered App</h1>
+  </body>
 </html>
