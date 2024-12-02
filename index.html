@@ -12,14 +12,10 @@
 
       console.log(obj);
 
-      // loop thru each object in array returned as JSON
+    
       obj.forEach(function (item) {
-        // reformat string contained in delimited acf field data, add curlies and quotes
         let x = '{"' + item.scf_fields + '"}';
-        // https://www.w3schools.com/jsref/jsref_replace.asp
-        // x = x.replace(/,/g,'","');
         x = x.replaceAll(",", '","');
-        // x = x.replace(/:/g,'":"');
         x = x.replaceAll(":", '":"');
 
         let y = JSON.parse(x);
